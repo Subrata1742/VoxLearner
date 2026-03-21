@@ -49,8 +49,10 @@ export const configureAssistant = () => {
         },
       ],
     },
-    // clientMessages: [],
-    // serverMessages: [],
+    // @ts-expect-error
+    clientMessages: [],
+    // @ts-expect-error
+    serverMessages: [],
   };
   return vapiAssistant;
 };

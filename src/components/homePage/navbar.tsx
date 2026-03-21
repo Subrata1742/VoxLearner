@@ -1,9 +1,14 @@
-import React from 'react';
+"use client"
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Navitem from './navitem';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 const Navbar = () => {
+    const pathname = usePathname();
+    if (pathname.startsWith('/companion/')) return null;
+    if (pathname === '/sign-in') return null;
+
     return (
         <nav className="sticky top-0 z-50 w-full border-b border-b-slate-700 bg-transparent backdrop-blur-xs ">
             <div className="container flex h-14 items-center justify-between px-1.5 md:px-8 mx-auto">

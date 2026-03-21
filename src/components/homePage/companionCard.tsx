@@ -18,7 +18,7 @@ const ompanionCard = ({ companion }: { companion: any }) => {
             <CardContent className='gap-5 flex flex-col'>
                 <Image src={companion.image} alt={companion.name} width={50} height={50} className='rounded-full' />
                 <CardTitle>{companion.name}</CardTitle>
-                <CardDescription>{companion.description}</CardDescription>
+                <CardDescription>{companion.topic}</CardDescription>
                 <p>{companion.duration} sec</p>
             </CardContent>
             <CardFooter>
