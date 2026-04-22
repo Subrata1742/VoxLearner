@@ -9,6 +9,8 @@ export function cn(...inputs: ClassValue[]) {
 //vapi sdk
 
 export const configureAssistant = () => {
+
+
   const voiceId = "sarah";
 
   const vapiAssistant: CreateAssistantDTO = {

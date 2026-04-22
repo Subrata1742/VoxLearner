@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import {
     Field,
@@ -24,6 +24,7 @@ import Link from 'next/link'
 import { createCompanion } from '@/lib/actions/companion.action'
 import { redirect } from 'next/navigation';
 import { useAuth } from '@clerk/nextjs';
+import { Bot, Sparkles, Mic, Clock, Type, X } from 'lucide-react';
 
 const CompanionForm = () => {
 
@@ -53,39 +54,47 @@ const CompanionForm = () => {
 
     };
 
-
-
     return (
 
-        <form onSubmit={handleCreateCompanion} >
-            <FieldGroup className='gap-3'>
-                <FieldSet className='gap-0'>
-                    <FieldLegend>Companion builder</FieldLegend>
-                    <FieldDescription>
-                        Create your own companion
-                    </FieldDescription>
-                    <FieldGroup>
+        <form onSubmit={handleCreateCompanion} className="relative z-10 flex flex-col gap-8 w-full">
+            <div className="text-center mb-2">
+                <div className="form-icon-wrapper">
+                    <Bot size={32} />
+                </div>
+                <h2 className="form-header-title">Create Companion</h2>
+                <p className="text-white/60 mt-2">Design your perfect AI learning partner</p>
+            </div>
+
+            <div className="space-y-6">
+                <div className="form-section-card space-y-5">
+                    <h3 className="form-section-title">
+                        <Type size={18} className="text-sky-400" /> Basic Details
+                    </h3>
+
+                    <FieldGroup className='gap-6'>
                         <Field>
-                            <FieldLabel htmlFor="name">
-                                Compaion Name
+                            <FieldLabel htmlFor="name" className="text-white/80 font-semibold ml-1">
+                                Companion Name
                             </FieldLabel>
                             <Input
                                 id="name"
-                                placeholder="Evil Rabbit"
+                                placeholder="e.g. Professor Alex"
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                 required
+                                className="form-input-field"
                             />
                         </Field>
+
                         <Field>
-                            <FieldLabel htmlFor="subject">
+                            <FieldLabel htmlFor="subject" className="text-white/80 font-semibold ml-1">
                                 Subject
                             </FieldLabel>
                             <Select defaultValue="" value={formData.subject} onValueChange={(value) => setFormData({ ...formData, subject: value })}>
-                                <SelectTrigger id="subject">
-                                    <SelectValue placeholder="Subject" />
+                                <SelectTrigger id="subject" className="form-input-field">
+                                    <SelectValue placeholder="Select a subject" />
                                 </SelectTrigger>
-                                <SelectContent>
+                                <SelectContent className="bg-[#1a1a2e] border-white/10 text-white rounded-xl">
                                     <SelectGroup>
                                         <SelectItem value="science">Science</SelectItem>
                                         <SelectItem value="maths">Maths</SelectItem>
@@ -103,107 +112,101 @@ const CompanionForm = () => {
                                 </SelectContent>
                             </Select>
                         </Field>
+
                         <Field>
-                            <FieldLabel htmlFor="topic">
-                                What should companion help with?
+                            <FieldLabel htmlFor="topic" className="text-white/80 font-semibold ml-1">
+                                Specific Topic & Focus
                             </FieldLabel>
                             <Textarea
                                 id="topic"
                                 value={formData.topic}
                                 onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
-                                placeholder="Topic"
-                                className="resize-none"
+                                placeholder="What exactly do you want to learn? (e.g. Conversational Spanish for travel)"
+                                className=" form-input-field resize-none min-h-[100px] p-4"
                             />
                         </Field>
-
-
                     </FieldGroup>
-                </FieldSet>
+                </div>
 
-                <div className='flex items-center justify-between '>
-                    <FieldSet className='gap-0'>
-                        <FieldLegend>Voice</FieldLegend>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="form-section-card">
+                        <h3 className="form-section-title">
+                            <Mic size={18} className="text-purple-400" /> Voice & Style
+                        </h3>
 
-                        <FieldGroup>
-
-                            <Field orientation="horizontal">
-                                <RadioGroup defaultValue='male' className='flex items-center gap-2' onValueChange={(value) => setFormData({ ...formData, voice: value })}>
-                                    <div className='flex items-center gap-2'>
-                                        <RadioGroupItem className='bg-white' value="male" id='male' />
-                                        <FieldLabel
-                                            htmlFor="male"
-                                            className="font-normal"
-                                        >
-                                            male
-                                        </FieldLabel>
+                        <div className="space-y-6 flex-1 mt-2">
+                            <Field>
+                                <FieldLabel className="text-white/80 font-semibold ml-1 mb-2 block">
+                                    Voice Gender
+                                </FieldLabel>
+                                <RadioGroup defaultValue='male' className='flex items-center gap-6 mt-3' onValueChange={(value) => setFormData({ ...formData, voice: value })}>
+                                    <div className='flex items-center gap-3'>
+                                        <RadioGroupItem className='bg-white/10 border-white/20 text-[#e94560]' value="male" id='male' />
+                                        <label htmlFor="male" className="text-white font-medium cursor-pointer">Male</label>
                                     </div>
-                                    <div className='flex items-center gap-2'>
-                                        <RadioGroupItem className='bg-white' value="female" id='female' />
-                                        <FieldLabel
-                                            htmlFor="female"
-                                            className="font-normal"
-                                        >
-                                            female
-                                        </FieldLabel>
+                                    <div className='flex items-center gap-3'>
+                                        <RadioGroupItem className='bg-white/10 border-white/20 text-[#e94560]' value="female" id='female' />
+                                        <label htmlFor="female" className="text-white font-medium cursor-pointer">Female</label>
                                     </div>
                                 </RadioGroup>
-
                             </Field>
 
-
-                        </FieldGroup>
-                    </FieldSet>
-
-                    <FieldSet className='w-[50%] gap-0'>
-                        <FieldLegend>Style</FieldLegend>
-
-                        <FieldGroup>
-
                             <Field>
+                                <FieldLabel htmlFor="style" className="text-white/80 font-semibold ml-1 block">
+                                    Teaching Style
+                                </FieldLabel>
                                 <Select defaultValue="" value={formData.style} onValueChange={(value) => setFormData({ ...formData, style: value })}>
-                                    <SelectTrigger id="style">
-                                        <SelectValue placeholder="Style" />
+                                    <SelectTrigger id="style" className="form-input-field mt-1">
+                                        <SelectValue placeholder="Select style" />
                                     </SelectTrigger>
-                                    <SelectContent>
+                                    <SelectContent className="bg-[#1a1a2e] border-white/10 text-white rounded-xl">
                                         <SelectGroup>
-                                            <SelectItem value="casual">casual</SelectItem>
-                                            <SelectItem value="formal">formal</SelectItem>
-
+                                            <SelectItem value="casual">Casual & Friendly</SelectItem>
+                                            <SelectItem value="formal">Formal & Academic</SelectItem>
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
                             </Field>
+                        </div>
+                    </div>
 
-
-                        </FieldGroup>
-                    </FieldSet>
+                    <div className="form-section-card">
+                        <h3 className="form-section-title">
+                            <Clock size={18} className="text-green-400" /> Session Settings
+                        </h3>
+                        <div className="space-y-4 flex-1 mt-2">
+                            <Field>
+                                <FieldLabel htmlFor="duration" className="text-white/80 font-semibold ml-1">
+                                    Target Duration (minutes)
+                                </FieldLabel>
+                                <Input
+                                    id="duration"
+                                    value={formData.duration || ""}
+                                    onChange={(e) => setFormData({ ...formData, duration: Number(e.target.value) })}
+                                    placeholder="45"
+                                    required
+                                    type='number'
+                                    className="form-input-field mt-1"
+                                />
+                                <p className="text-white/40 text-xs mt-3 ml-1 leading-relaxed">
+                                    Set an approximate duration for your sessions. Your companion will try to pace the lesson to fit this timeframe.
+                                </p>
+                            </Field>
+                        </div>
+                    </div>
                 </div>
-                <FieldSet className='gap-0'>
-                    <FieldGroup>
-                        <Field>
-                            <FieldLabel htmlFor="duration">
-                                Duration
-                            </FieldLabel>
-                            <Input
-                                id="duration"
-                                value={formData.duration}
-                                onChange={(e) => setFormData({ ...formData, duration: Number(e.target.value) })}
-                                placeholder="45"
-                                required
-                                type='number'
-                            />
-                        </Field>
-                    </FieldGroup>
-                </FieldSet>
-                <Field orientation="horizontal">
-                    <Button type="submit">Submit</Button>
-                    <Link href="/">
-                        <Button className='text-black' variant="outline" type="button">
-                            Cancel
-                        </Button>
-                    </Link>
-                </Field>
-            </FieldGroup>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center justify-end gap-4 mt-2 pt-6 border-t border-white/10">
+                <Link href="/" className="w-full sm:w-auto">
+                    <Button className='form-cancel-btn' type="button" >
+                        <X size={18} /> Cancel
+                    </Button>
+                </Link>
+                <Button type="submit" className="form-submit-btn">
+                    <Sparkles size={18} /> Create Companion
+                </Button>
+            </div>
         </form>
     )
 }

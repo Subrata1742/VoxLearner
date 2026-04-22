@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/homePage/navbar";
 import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from '@clerk/themes'
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,7 +29,31 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ClerkProvider>
+        <ClerkProvider
+          appearance={{
+            variables: {
+              colorPrimary: "#e94560",
+              colorBackground: "#0f3460",
+              colorForeground: "#ffffff",
+              colorMutedForeground: "rgba(255,255,255,0.6)",
+              colorBorder: "rgba(255,255,255,1)",
+              borderRadius: "10px",
+              fontFamily: "var(--font-geist-sans)",
+
+            },
+            elements: {
+              userButtonPopoverActionButton: "text-white! ",
+              tabButton: " text-gray-200! focus:text-[#e94560]! hover:text-white!",
+
+              socialButtonsBlockButtonText: "text-white!",
+
+
+
+
+            }
+          }}
+
+        >
           <div className="layout-container ">
 
             <Navbar />

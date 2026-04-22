@@ -25,21 +25,49 @@ export const createCompanion = async (formData: CreateCompanion) => {
 };
 
 
-export const getAllCompanions = async () => {
-    const { userId: author } = await auth();
-    if (!author) {
-        return
-    }
-    return prisma.companion.findMany({
-        where: {
-            userId: author,
-        },
-        orderBy: {
-            updatedAt: "desc",
-        },
-    });
-};
+export const getAllCompanions = async ({ limit = 10, page = 1, subject, topic }: GetAllCompanions = {}) => {
+    try {
+        const skip = (page - 1) * limit;
 
+        // Build the "where" filter dynamically
+        const where: any = {};
+
+        if (subject && topic) {
+            // Both filters: Subject must match AND (Topic OR Name must match)
+            where.AND = [
+                { subject: { contains: subject, mode: 'insensitive' } },
+                {
+                    OR: [
+                        { topic: { contains: topic, mode: 'insensitive' } },
+                        { name: { contains: topic, mode: 'insensitive' } }
+                    ]
+                }
+            ];
+        } else if (subject) {
+            where.subject = { contains: subject, mode: 'insensitive' };
+        } else if (topic) {
+            // Search for topic in both 'topic' and 'name' fields
+            where.OR = [
+                { topic: { contains: topic, mode: 'insensitive' } },
+                { name: { contains: topic, mode: 'insensitive' } }
+            ];
+        }
+
+        const companions = await prisma.companion.findMany({
+            where,
+            skip,
+            take: limit,
+            orderBy: {
+                createdAt: 'desc' // Optional: Good practice for lists
+            }
+        });
+
+        return companions;
+    } catch (error: any) {
+        console.error("Error fetching companions:", error);
+        throw new Error(error.message || "Failed to fetch companions");
+    }
+};
 export const getCompanionById = async (id: string) => {
     const { userId: author } = await auth();
     if (!author) {
@@ -63,6 +91,22 @@ export const updateConversations = async (id: string, conversations: any[]) => {
             companionId: id,
             messages: [...conversations].reverse(), // Store all messages chronologically
         },
+    });
+};
+
+export const getConversationsByCompanionId = async (id: string) => {
+    const { userId: author } = await auth();
+    if (!author) {
+        return
+    }
+    return prisma.conversation.findMany({
+        where: {
+            companionId: id,
+        },
+        take: 3,
+        orderBy: {
+            createdAt: 'desc' // Optional: Good practice for lists
+        }
     });
 };
 

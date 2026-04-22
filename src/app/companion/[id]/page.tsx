@@ -14,8 +14,7 @@ const CompanionPage = async ({ params }: urlIdProps) => {
     }
 
     return (
-        <main className="content-wrapper">
-
+        <main className="w-full h-screen max-w-[1400px] mx-auto flex flex-col pt-4 pb-6 px-4 md:px-8 overflow-hidden">
             <Agent {...companion} />
         </main>
     )
