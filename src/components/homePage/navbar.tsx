@@ -4,9 +4,10 @@ import { Button } from '@/components/ui/button';
 import Navitem from './navitem';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { Show, SignInButton, UserButton } from '@clerk/nextjs';
 const Navbar = () => {
     const pathname = usePathname();
-    if (pathname.startsWith('/companion/')) return null;
+    if (pathname.startsWith('/companion/') && pathname !== '/companion/new') return null;
     if (pathname === '/sign-in') return null;
 
     return (
@@ -23,9 +24,19 @@ const Navbar = () => {
                 </div>
                 <div className="flex items-center gap-2 ">
                     <Navitem />
-                    <Button asChild variant="default" className='mx-2' size="sm">
-                        <Link href="/sign-in">Sign In</Link>
-                    </Button>
+                    <header>
+                        <Show when="signed-out">
+                            <SignInButton>
+                                <Button variant="default" className='mx-2' size="sm">
+                                    Sign In
+                                </Button>
+                            </SignInButton>
+
+                        </Show>
+                        <Show when="signed-in">
+                            <UserButton />
+                        </Show>
+                    </header>
                 </div>
             </div>
         </nav>

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/homePage/navbar";
+import { ClerkProvider } from "@clerk/nextjs";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -27,17 +28,14 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="relative  min-h-screen  "
-          style={{
-            backgroundImage: "url('/Background.jpeg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}>
-          <Navbar />
-          {children}
-        </div>
-        <Toaster />
+        <ClerkProvider>
+          <div className="layout-container ">
+
+            <Navbar />
+            {children}
+          </div>
+          <Toaster />
+        </ClerkProvider>
       </body>
     </html>
   );

@@ -1,35 +1,29 @@
-import React from 'react'
-import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import {
-    Card,
-    CardAction,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardTitle,
-} from "@/components/ui/card"
-import Link from 'next/link'
 
-const ompanionCard = ({ companion }: { companion: any }) => {
+import { Clock, Activity } from 'lucide-react';
+
+const CompanionCard = ({ companion }: { companion: any }) => {
     return (
-        <Card className='bg-transparent backdrop-blur-xs text-white'>
+        <div className="companion-card h-full">
+            <div className="flex justify-between items-start">
+                <div>
+                    <h3 className="companion-name">{companion.name}</h3>
+                    <p className="companion-topic">{companion.topic}</p>
+                </div>
+                <span className="companion-type">{companion.subject}</span>
+            </div>
 
-            <CardContent className='gap-5 flex flex-col'>
-                <Image src={companion.image} alt={companion.name} width={50} height={50} className='rounded-full' />
-                <CardTitle>{companion.name}</CardTitle>
-                <CardDescription>{companion.topic}</CardDescription>
-                <p>{companion.duration} sec</p>
-            </CardContent>
-            <CardFooter>
-                <CardAction>
-                    <Link href={`/companion/${companion.id}`}>
-                        <Button>Start Conversation</Button>
-                    </Link>
-                </CardAction>
-            </CardFooter>
-        </Card>
+            <div className="companion-details">
+                <div className="flex items-center gap-2 text-sm text-[#ffffffb3]">
+                    <Activity className="text-[#e94560]" size={16} />
+                    <span>{companion.style}</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-[#ffffffb3]">
+                    <Clock className="text-[#e94560]" size={16} />
+                    <span>{companion.duration} min</span>
+                </div>
+            </div>
+        </div>
     )
 }
 
-export default ompanionCard
+export default CompanionCard

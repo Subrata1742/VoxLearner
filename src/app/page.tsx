@@ -2,15 +2,17 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import CompanionCard from "@/components/homePage/companionCard";
-import { companionList } from "./constrant";
+import { getAllCompanions } from "@/lib/actions/companion.action";
+import { Bot } from "lucide-react";
 
-export default function Home() {
 
+export default async function Home() {
+  const companionsList = await getAllCompanions();
 
 
   return (
-    <main >
-      <section className="flex items-center justify-between md:mx-[10%] mx-5 p-5 mt-5 border backdrop-blur-xl border-slate-700 rounded-4xl ">
+    <main className="content-wrapper">
+      <section className=" header-section ">
         <div className="flex flex-col gap-3 items-start justify-center md:w-1/2">
           <div className=" text-start md:text-4xl text-xl ">
             <div className=" font-bold text-sky-200">Vox Learner :
@@ -29,7 +31,7 @@ export default function Home() {
           <div className="flex items-center justify-start md:w-1/2 w-full gap-2 ">
 
             <Button asChild variant="default" className='mx-2 rounded-full w-full text-xl px-12 ' size="lg">
-              <Link href="/sign-in">Sign In</Link>
+              <Link href="/companion/new">Get Started</Link>
             </Button>
           </div>
         </div>
@@ -40,13 +42,17 @@ export default function Home() {
 
       {/* companion list */}
 
-      <section className="md:mx-[10%] mx-5">
-        <div className="text-center text-4xl font-bold text-sky-200 py-9">
-          Companions
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3  gap-9 ">
-          {companionList.slice(0, 3).map((companion) => (
-            <CompanionCard key={companion.id} companion={companion} />
+      <section className="companion-section ">
+        <h2 className="section-title">
+          <Bot size={28} color="#e94560" /> Your AI Companions
+        </h2>
+
+        {!companionsList && <p className="text-center  text-sky-200">No Companions Found</p>}
+        <div className="companions-grid ">
+          {companionsList?.slice(0, 3).map((companion) => (
+            <Link href={`/companion/${companion.id}`} key={companion.id} style={{ textDecoration: 'none' }}>
+              <CompanionCard companion={companion} />
+            </Link>
           ))}
         </div>
         <div className="flex items-center justify-center py-5">

@@ -1,8 +1,11 @@
+import { PricingTable } from '@clerk/nextjs'
 import React from 'react'
 
 const SubscriptionPage = () => {
     return (
-        <div>SubscriptionPage</div>
+        <main className='content-wrapper'>
+            <PricingTable />
+        </main>
     )
 }
 

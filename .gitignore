@@ -42,3 +42,9 @@ next-env.d.ts
 
 #history
 .history/*
+# clerk configuration (can include secrets)
+/.clerk/
+
+/src/generated/prisma
+
+/src/app/generated/prisma

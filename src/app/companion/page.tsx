@@ -1,19 +1,34 @@
 import React from 'react'
 import CompanionCard from '@/components/homePage/companionCard'
-import { companionList } from '@/app/constrant'
+import { getAllCompanions } from '@/lib/actions/companion.action';
+import { redirect } from 'next/navigation';
+import { auth } from '@clerk/nextjs/server';
+import Link from 'next/link';
+import { Bot } from 'lucide-react';
 
 
 
-const Companionlist = () => {
+
+
+const Companionlist = async () => {
+    const { isAuthenticated } = await auth()
+    if (!isAuthenticated) {
+        redirect("/sign-in");
+    }
+
+    const companionList = await getAllCompanions();
+    console.log(companionList);
     return (
-        <main>
-            <section>
-                <div className="text-center text-4xl font-bold text-sky-200 py-9">
-                    Companions
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-9 md:mx-[10%] mx-5">
-                    {companionList.map((companion) => (
-                        <CompanionCard key={companion.id} companion={companion} />
+        <main className='content-wrapper'>
+            <section className='companion-section'>
+                <h2 className="section-title">
+                    <Bot size={28} color="#e94560" /> Your AI Companions
+                </h2>
+                <div className="companions-grid">
+                    {companionList?.map((companion) => (
+                        <Link key={companion.id} href={`/companion/${companion.id}`}>
+                            <CompanionCard companion={companion} />
+                        </Link>
                     ))}
                 </div>
 
