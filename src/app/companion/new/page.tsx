@@ -1,7 +1,15 @@
 import CompanionForm from '@/components/companion/CompanionForm'
 import { newCompanionPermissions } from '@/lib/actions/companion.action'
 
+import { redirect } from 'next/navigation';
+import { auth } from '@clerk/nextjs/server';
+
+
 const page = async () => {
+    const { userId } = await auth()
+    if (!userId) {
+        redirect("/sign-in");
+    }
 
     const permission = await newCompanionPermissions()
     if (!permission) {

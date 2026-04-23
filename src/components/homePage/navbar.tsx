@@ -52,9 +52,9 @@ const Navbar = () => {
             <nav className="navbar-container">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                        <Link href="/" className="flex items-center space-x-3 group">
+                        <Link href="/" className="flex items-center space-x-1 group">
                             <div className="navbar-logo-ring">
-                                <Image src="/logo 1.png" alt="Logo" fill className="object-cover" />
+                                <Image src="/logo-removebg.png" alt="Logo" fill className="object-cover" />
                             </div>
                             <span className="navbar-brand-text">
                                 Vox Learner
@@ -73,7 +73,7 @@ const Navbar = () => {
                         <header>
                             <Show when="signed-out">
                                 <SignInButton>
-                                    <Button className='navbar-signin-btn'>
+                                    <Button className='navbar-signin-btn rounded-xl '>
                                         Sign In
                                     </Button>
                                 </SignInButton>

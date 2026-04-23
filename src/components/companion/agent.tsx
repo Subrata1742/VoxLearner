@@ -8,10 +8,11 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import soundwaves from '@/app/constrant/sound waves.json'
+import Waves from '@/app/constrant/Wave.json'
 
 import { useRouter } from 'next/navigation';
 import { newSessionPermissions, updateConversations } from '@/lib/actions/companion.action';
-import { Mic, MicOff, Phone, PhoneOff, ArrowLeft, Activity, MessageSquareText } from 'lucide-react';
+import { Mic, MicOff, Phone, PhoneOff, ArrowLeft, Activity, MessageSquareText, Bot } from 'lucide-react';
 
 enum CallStatus {
     INACTIVE = "INACTIVE",
@@ -124,13 +125,13 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
     return (
         <div className="flex flex-col gap-3 w-full h-full max-w-6xl mx-auto ">
             {/* Header - Fixed Height */}
-            <div className='agent-header-card '>
+            <div className='agent-header-card py-2 '>
                 <Button variant="ghost" size="icon" onClick={() => router.back()} className="text-white hover:bg-white/10 rounded-full transition-colors">
                     <ArrowLeft size={24} />
                 </Button>
-                <div className='flex items-center gap-4'>
-                    <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#e94560]/50 relative shadow-[0_0_15px_rgba(233,69,96,0.3)]">
-                        <Image src="/logo 1.png" alt="logo" fill className="object-cover" />
+                <div className='flex items-center gap-1'>
+                    <div className="w-15 h-15 rounded-full  relative ">
+                        <Image src="/logo-removebg.png" alt="logo" fill className="object-cover " />
                     </div>
                     <div className="flex flex-col items-start">
                         <span className='font-extrabold text-transparent bg-clip-text bg-linear-to-r from-white to-[#e94560] text-xl md:text-2xl'>{subject}</span>
@@ -168,17 +169,17 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
                     <div className="relative w-full flex-1 flex items-center justify-center min-h-[250px] md:min-h-[300px]">
                         {/* Avatar Core */}
                         <div className={cn('agent-avatar-ring',
-                            callStatus === CallStatus.ACTIVE ? 'scale-110 shadow-[0_0_120px_rgba(233,69,96,0.6)] border-[#e94560]/80' : 'scale-100 border-white/10',
+                            callStatus === CallStatus.ACTIVE ? ' scale-110 shadow-[0_0_120px_rgba(233,69,96,0.6)] border-[#e94560]/80' : 'scale-100 border-white/10 bg-[#e94560]/20',
                             callStatus === CallStatus.CONNECTING && 'animate-pulse border-yellow-500/50 shadow-[0_0_60px_rgba(234,179,8,0.3)]'
                         )}>
-                            <Image src="/logo 1.png" alt="logo" width={224} height={224} className="opacity-95 object-cover w-full h-full" priority />
+                            <Bot size={180} className={cn("text-[#e94560] mb-3 transition-opacity duration-1000", callStatus === CallStatus.ACTIVE ? 'opacity-0' : '')} />
                         </div>
 
                         {/* Soundwaves Animation */}
-                        <div className={cn('absolute transition-opacity duration-1000 w-[450px] h-[450px] md:w-[750px] md:h-[750px] pointer-events-none', callStatus === CallStatus.ACTIVE ? 'opacity-100 scale-100' : 'opacity-0 scale-90')}>
+                        <div className={cn('absolute z-50 transition-opacity duration-1000 w-[250px] h-[250px] md:w-[400px] md:h-[400px] pointer-events-none', callStatus === CallStatus.ACTIVE ? 'opacity-100 ' : 'opacity-0 ')}>
                             <Lottie
                                 lottieRef={lottieRef}
-                                animationData={soundwaves}
+                                animationData={Waves}
                                 autoplay={false}
                                 className="w-full h-full object-cover"
                             />

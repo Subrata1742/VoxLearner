@@ -36,16 +36,21 @@ export default async function Home() {
           </Link>
         </div>
 
-        <div className="max-md:hidden flex items-center justify-center relative md:w-2/5">
-          <div className="absolute inset-0 bg-[#e94560]/20 blur-[80px] rounded-full scale-150"></div>
-          <Image
-            src="/hero1.png"
-            alt="Hero"
-            width={400}
-            height={400}
-            className="relative z-10 drop-shadow-[0_0_40px_rgba(233,69,96,0.4)] hover:scale-105 transition-transform duration-700 ease-out"
-            priority
-          />
+        <div className="max-md:hidden flex items-center justify-center relative md:w-2/5 group">
+          {/* Your existing glowing background effect */}
+          <div className="absolute inset-0 bg-[#e94560]/20 blur-[100px] rounded-full scale-125 -z-10 transition-all duration-700 group-hover:bg-[#e94560]/30"></div>
+
+          {/* The newly transparent image */}
+          <div className="relative w-[400px] h-[400px]">
+            <Image
+              src="/robot-removebg-preview.png"
+              alt="VoxLearner AI Companion"
+              fill
+              sizes="(max-width: 768px) 100vw, 400px"
+              className="object-contain relative z-10 hover:scale-105 hover:-translate-y-2 transition-all duration-700 ease-out drop-shadow-2xl"
+              priority
+            />
+          </div>
         </div>
       </section>
 
@@ -108,7 +113,7 @@ export default async function Home() {
 
           <div className="flex flex-col items-center text-center">
             <div className="step-indicator">3</div>
-            <div className="step-card-icon! !text-[#e94560]! !border-[#e94560]/20!"><PlayCircle size={32} /></div>
+            <div className="step-card-icon"><PlayCircle size={32} /></div>
             <h3 className="companion-name mb-2">Start Talking</h3>
             <p className="companion-topic">Launch a live voice call and learn.</p>
           </div>
@@ -141,7 +146,7 @@ export default async function Home() {
 
             {companionsList.length > 3 && (
               <div className="flex justify-center mt-12">
-                <Link href="/companion" className="create-btn !from-transparent! !to-transparent! border border-white/20">
+                <Link href="/companion" className="create-btn ">
                   View All Companions
                 </Link>
               </div>

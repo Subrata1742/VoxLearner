@@ -360,7 +360,7 @@
   }
 
   .agent-avatar-ring {
-    @apply absolute transition-all duration-1000 z-10 w-36 h-36 md:w-56 md:h-56 rounded-full border-4 overflow-hidden bg-[#1a1a2e] flex items-center justify-center;
+    @apply absolute transition-all duration-1000 z-10 w-40 h-40 md:w-56 md:h-56 rounded-full border-4 overflow-hidden bg-[#1a1a2e] flex items-center justify-center;
     box-shadow: 0 0 60px rgba(233, 69, 96, 0.2);
   }
 
@@ -382,8 +382,9 @@
   }
 
   .navbar-logo-ring {
-    @apply relative w-10 h-10 rounded-full overflow-hidden border border-[#e94560]/30 group-hover:scale-105 transition-all;
-    box-shadow: 0 0 15px rgba(233, 69, 96, 0.3);
+    @apply relative w-10 h-10 group-hover:scale-105 transition-all rounded-full;
+
+
   }
 
   .navbar-brand-text {
@@ -391,7 +392,7 @@
   }
 
   .navbar-signin-btn {
-    @apply rounded-full bg-linear-to-r from-[#e94560] to-[#1a1a2e] text-white border border-white/10 transition-all px-6 font-semibold shadow-md;
+    @apply inline-block bg-linear-to-br from-[#e94560] to-[#1a1a2e] text-white py-3 px-8 rounded-full no-underline font-semibold transition-all duration-300;
   }
 
   .navbar-signin-btn:hover {

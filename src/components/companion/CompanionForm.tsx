@@ -3,11 +3,10 @@ import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import {
     Field,
-    FieldDescription,
+
     FieldGroup,
     FieldLabel,
-    FieldLegend,
-    FieldSet,
+
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import {
@@ -23,15 +22,10 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import Link from 'next/link'
 import { createCompanion } from '@/lib/actions/companion.action'
 import { redirect } from 'next/navigation';
-import { useAuth } from '@clerk/nextjs';
 import { Bot, Sparkles, Mic, Clock, Type, X } from 'lucide-react';
 
 const CompanionForm = () => {
 
-    const { isSignedIn } = useAuth()
-    if (!isSignedIn) {
-        redirect("/sign-in");
-    }
 
     const [formData, setFormData] = useState<CreateCompanion>({
         name: "",

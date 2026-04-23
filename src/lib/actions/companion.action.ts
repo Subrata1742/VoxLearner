@@ -127,6 +127,9 @@ export const conversationCount = async () => {
 
 export const newCompanionPermissions = async () => {
     const { userId, has } = await auth();
+    if (!userId) {
+        return
+    }
 
 
     let limit = 0;
