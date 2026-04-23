@@ -14,7 +14,7 @@ export default async function Home() {
       {/* 1. Hero Section */}
       <section className="header-section ">
         <div className="flex flex-col gap-4 items-center md:items-start md:w-3/5">
-          <div className="pro-badge flex items-center gap-2  capitalize">
+          <div className="pro-badge flex items-center max-md:py-2 gap-2 md:gap-2 max-md:text-xs capitalize">
             <Sparkles size={16} />
             <span>Next-Gen Education Platform</span>
           </div>
@@ -22,9 +22,9 @@ export default async function Home() {
           <h1 className="hero-title">
             <span className="bg-clip-text text-transparent bg-linear-to-r from-white to-[#e94560]">Vox Learner</span>
             <br />
-            <span className="text-white text-[1.8rem] md:text-[2.5rem] lg:text-[3rem]">A Real-Time, Voice-Driven</span>
+            <span className="text-white text-[1.7rem] md:text-[2.5rem]">A Real-Time, Voice-Driven</span>
             <br />
-            <span className="text-white/90 text-[1.5rem] md:text-[2rem] lg:text-[2.5rem]">AI Learning Companion</span>
+            <span className="text-white/90 text-[1.2rem] md:text-[2rem]">AI Learning Companion</span>
           </h1>
 
           <p className="hero-subtitle">
@@ -52,7 +52,7 @@ export default async function Home() {
       {/* 2. Features Section */}
       <section className="flex flex-col gap-10">
         <div className="text-center">
-          <h2 className="user-name">Why Choose Vox Learner?</h2>
+          <h2 className="user-name max-md:text-[1.5rem]!">Why Choose Vox Learner?</h2>
           <p className="user-email max-w-2xl mx-auto">Experience the next generation of online learning powered by advanced artificial intelligence.</p>
         </div>
 
@@ -154,14 +154,14 @@ export default async function Home() {
       <section className="stat-card p-12! md:p-20! bg-linear-to-br! from-[#0f3460]! to-[#1a1a2e]! mb-10">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(233,69,96,0.3)_0%,transparent_50%)]"></div>
         <div className="relative z-10 flex flex-col items-center">
-          <h2 className="text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] font-black text-white mb-6 leading-tight max-w-3xl">
+          <h2 className="text-[1.4rem] md:text-[3.5rem]  font-black text-white mb-6 leading-tight max-w-3xl">
             Ready to transform your <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-white to-[#e94560]">learning journey?</span>
           </h2>
-          <p className="user-email text-xl mb-10 max-w-2xl font-medium">
+          <p className="user-email text-lg md:text-xl mb-10 max-w-2xl font-medium">
             Join Vox Learner today and experience the most natural, effective way to master new skills through live voice interaction.
           </p>
-          <Link href="/companion/new" className="create-btn py-5! px-12! text-xl flex items-center gap-3">
+          <Link href="/companion/new" className="create-btn py-2! md:py-4! px-5! md:px-10! text-sm md:text-lg flex items-center gap-3">
             Create Your First Companion <ArrowRight size={24} />
           </Link>
         </div>

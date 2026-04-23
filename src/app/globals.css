@@ -159,11 +159,11 @@
   }
 
   .user-name {
-    @apply text-[2rem] md:text-[2.5rem] font-extrabold m-0 bg-clip-text text-transparent bg-linear-to-r from-white to-[#e94560];
+    @apply text-[1.7rem] md:text-[2.5rem] font-extrabold m-0 bg-clip-text text-transparent bg-linear-to-r from-white to-[#e94560];
   }
 
   .user-email {
-    @apply text-lg text-white/70 m-0;
+    @apply text-base md:text-lg text-white/70 m-0;
   }
 
   .pro-badge {
@@ -201,7 +201,7 @@
   }
 
   .section-title {
-    @apply text-[1.8rem] font-bold mb-8 text-white flex items-center gap-4;
+    @apply text-[1.4rem] md:text-[1.8rem] font-bold mb-8 text-white flex items-center gap-4;
   }
 
   .section-title::after {
@@ -373,7 +373,7 @@
 
   /* Navbar Styling */
   .navbar-wrapper {
-    @apply w-full flex justify-center sticky top-4 z-3 px-4 md:px-8 transition-transform duration-500 ease-in-out;
+    @apply w-[95vw] md:w-full flex justify-center sticky top-4 z-3 px-4 md:px-8 transition-transform duration-500 ease-in-out;
   }
 
   .navbar-container {

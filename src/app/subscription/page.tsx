@@ -19,6 +19,7 @@ const SubscriptionPage = () => {
 
                     elements: {
                         // 🔥 MAIN CARD (like your stat-card)
+
                         pricingTableCard:
                             "relative! bg-white/5! backdrop-blur-md! border-0! rounded-[20px]! p-8! transition-all duration-300! hover:-translate-y-2! ",
 
@@ -47,6 +48,9 @@ const SubscriptionPage = () => {
                         pricingTableCardFeatures:
                             "text-white!/70!",
 
+
+
+
                         // BUTTON (matches your gradient buttons)
                         pricingTableCardButton:
                             "bg-linear-to-r! from-[#e94560]! to-[#1a1a2e]! text-white! font-semibold! rounded-xl! h-12!",
@@ -61,6 +65,13 @@ const SubscriptionPage = () => {
                         // BADGE (Most Popular)
                         pricingTableCardBadge:
                             "bg-[#e94560]! text-white! text-xs! px-3! py-1! rounded-full!",
+
+                        // Toggle ring
+                        switchIndicator:
+                            "group ring-white! data-[checked=true]:bg-[#e94560]! bg-white! ",
+
+                        switchThumb:
+                            "bg-[#e94560]!  group-data-[checked=true]:bg-white!",
 
 
                         drawerContent:

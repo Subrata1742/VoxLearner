@@ -68,6 +68,7 @@ export const getAllCompanions = async ({ limit = 10, page = 1, subject, topic }:
         throw new Error(error.message || "Failed to fetch companions");
     }
 };
+
 export const getCompanionById = async (id: string) => {
     const { userId: author } = await auth();
     if (!author) {
@@ -145,6 +146,45 @@ export const newCompanionPermissions = async () => {
     });
 
     if (companionCount >= limit) {
+        return false
+    } else {
+        return true;
+    }
+}
+
+export const newSessionPermissions = async (id: string) => {
+    const { userId, has } = await auth();
+    if (!userId) {
+        return
+    }
+
+    let limit = 0;
+
+    if (has({ plan: 'premium' }) || has({ plan: 'pro' })) {
+        return true;
+    } else if (has({ feature: "10_conversation_month" })) {
+        limit = 10;
+    }
+
+    const conversationCount = await prisma.conversation.count({
+        where: {
+
+            companion: {
+                userId: userId!,
+            },
+
+            companionId: id,
+            createdAt: {
+                gte: new Date(
+                    new Date().getFullYear(),
+                    new Date().getMonth(),
+                    1
+                )
+            }
+        },
+    });
+
+    if (conversationCount >= limit) {
         return false
     } else {
         return true;

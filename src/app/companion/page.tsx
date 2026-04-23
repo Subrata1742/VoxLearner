@@ -32,7 +32,7 @@ const Companionlist = async ({ searchParams }: SearchParams) => {
             <section className="stat-card cursor-default">
                 <div className="flex justify-between items-center max-sm:flex-col max-sm:items-start gap-4">
                     <h1 className="user-name">Companion Library</h1>
-                    <Link href="/companion/new" className="create-btn flex items-center gap-2 mt-0! py-2! px-6! text-sm">
+                    <Link href="/companion/new" className="create-btn flex items-center gap-2 mt-0! max-sm:mx-auto! py-1.5! md:py-2! px-6! text-sm">
                         <Plus size={18} /> New Companion
                     </Link>
                 </div>

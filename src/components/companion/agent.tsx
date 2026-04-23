@@ -8,9 +8,9 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import soundwaves from '@/app/constrant/sound waves.json'
-import Link from 'next/link';
+
 import { useRouter } from 'next/navigation';
-import { updateConversations } from '@/lib/actions/companion.action';
+import { newSessionPermissions, updateConversations } from '@/lib/actions/companion.action';
 import { Mic, MicOff, Phone, PhoneOff, ArrowLeft, Activity, MessageSquareText } from 'lucide-react';
 
 enum CallStatus {
@@ -29,9 +29,28 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     const [messages, setMessages] = useState<SavedMessage[]>([]);
+    const [callPermission, setCallPermission] = useState(false);
 
     const lottieRef = useRef<LottieRefCurrentProps>(null);
     const router = useRouter();
+
+
+
+    useEffect(() => {
+        // Call the permission function with the companion ID
+        const canStartcall = async () => {
+            const permission = await newSessionPermissions(id);
+            if (!permission) {
+                toast.error("You have reached the maximum number of calls this month");
+                router.push("/subscription");
+                setCallPermission(false)
+            }
+            else {
+                setCallPermission(true)
+            }
+        }
+        canStartcall()
+    }, []);
 
     useEffect(() => {
         if (lottieRef) {
@@ -80,6 +99,7 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
         setIsMuted(!isMutedState)
     }
     const startCall = () => {
+        if (!callPermission) return;
         setCallStatus(CallStatus.CONNECTING);
         const assistantOverrides = {
             variableValues: { subject, topic },
@@ -98,10 +118,13 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
         router.back();
     }
 
+
+
+
     return (
-        <div className="flex flex-col gap-4 w-full h-full max-w-6xl mx-auto ">
+        <div className="flex flex-col gap-3 w-full h-full max-w-6xl mx-auto ">
             {/* Header - Fixed Height */}
-            <div className='agent-header-card'>
+            <div className='agent-header-card '>
                 <Button variant="ghost" size="icon" onClick={() => router.back()} className="text-white hover:bg-white/10 rounded-full transition-colors">
                     <ArrowLeft size={24} />
                 </Button>
@@ -120,14 +143,14 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
             </div>
 
             {/* Mobile Topic Badge */}
-            <div className='sm:hidden flex justify-center z-10'>
-                <div className='inline-flex items-center px-4 py-1.5 bg-[#e94560]/10 border border-[#e94560]/20 rounded-full'>
+            <div className='sm:hidden flex justify-center  z-10'>
+                <div className='inline-flex items-center px-4 py-1.5 bg-[#e94560]/10 border border-[#e94560]/20 rounded-full w-full mx-2'>
                     <span className='text-xs text-[#e94560] font-semibold'>Topic: {topic}</span>
                 </div>
             </div>
 
 
-            <div className='flex flex-col gap-2 flex-1 w-full justify-center z-10'>
+            <div className='flex flex-col gap-1 flex-1 w-full justify-center z-10'>
                 {/* Main Center Area: Visuals & Overlay (Flex Grow) */}
                 <div className='agent-center-container'>
                     <div className="agent-glow-bg"></div>
@@ -167,7 +190,7 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
 
 
                 {/* Live Transcript Subtitle Overlay */}
-                <div className="w-full flex justify-center z-30 h-[100px] md:h-[130px] mt-2">
+                <div className="w-full flex justify-center z-30 h-[100px] md:h-[130px] mt-1">
                     <div className="agent-transcript-box">
                         {messages.length > 0 ? (
                             <div key={messages.length} className="flex flex-col items-center animate-in fade-in zoom-in-95 duration-500">
@@ -217,8 +240,9 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
                 )}
 
                 {(callStatus === CallStatus.INACTIVE || callStatus === CallStatus.FINISHED) && (
-                    <Button variant={"StartCall"}
+                    <Button
                         onClick={startCall}
+                        className='create-btn h-10 md:h-15 px-10 md:px-15! rounded-full mt-0!'
 
                     >
                         <Phone className=" h-7 w-7 md:h-10 md:w-10" /> {callStatus === CallStatus.FINISHED ? 'Start New Call' : 'Start Call'}
@@ -237,6 +261,7 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
                 {callStatus === CallStatus.ACTIVE && (
                     <Button variant={"EndCall"}
                         onClick={endCall}
+                        className='md:px-4!'
 
                     >
                         <PhoneOff className=" h-7 w-7 md:h-10 md:w-10" /> End Call

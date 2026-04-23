@@ -20,10 +20,11 @@ export const configureAssistant = () => {
     transcriber: {
       provider: "deepgram",
       model: "nova-3",
-      language: "en",
+      language: "multi",
     },
     voice: {
       provider: "11labs",
+      model: "eleven_multilingual_v2",
       voiceId: voiceId,
       stability: 0.4,
       similarityBoost: 0.8,
