@@ -4,6 +4,7 @@ import Image from "next/image";
 import CompanionCard from "@/components/homePage/companionCard";
 import { getAllCompanions } from "@/lib/actions/companion.action";
 import { Bot, Sparkles, Mic, Brain, Zap, ArrowRight, UserPlus, PlayCircle } from "lucide-react";
+import Footer from "@/components/homePage/footer";
 
 export default async function Home() {
   const companionsList = await getAllCompanions();
@@ -171,6 +172,7 @@ export default async function Home() {
           </Link>
         </div>
       </section>
+
 
     </main>
   );

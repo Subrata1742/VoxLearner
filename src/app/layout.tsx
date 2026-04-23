@@ -3,8 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/homePage/navbar";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkLoaded, ClerkLoading, ClerkProvider } from "@clerk/nextjs";
 import { dark } from '@clerk/themes'
+import Footer from "@/components/homePage/footer";
+import Loading from "./loading";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -57,7 +59,13 @@ export default function RootLayout({
           <div className="layout-container ">
 
             <Navbar />
-            {children}
+            <ClerkLoading>
+              <Loading />
+            </ClerkLoading>
+            <ClerkLoaded>
+              {children}
+            </ClerkLoaded>
+            <Footer />
           </div>
           <Toaster />
         </ClerkProvider>

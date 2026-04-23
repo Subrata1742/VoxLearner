@@ -18,33 +18,32 @@ const SubscriptionPage = () => {
                     },
 
                     elements: {
-                        // 🔥 MAIN CARD (like your stat-card)
+
 
                         pricingTableCard:
                             "relative! bg-white/5! backdrop-blur-md! border-0! rounded-[20px]! p-8! transition-all duration-300! hover:-translate-y-2! ",
 
-                        // Glow effect (same as your UI)
+
                         pricingTableCard__hover:
                             "shadow-[0_15px_35px_rgba(233,69,96,0.2)]! border-[#e94560]/40!",
 
-                        // TOP BORDER ANIMATION
+
                         pricingTableCard__before:
                             "content-['']! absolute! top-0! left-0! w-full! h-[2px]! bg-gradient-to-r! from-[#e94560]! to-transparent! scale-x-0! origin-left! transition-transform! duration-300!",
 
                         pricingTableCard__hoverBefore:
                             "scale-x-100!",
 
-                        // HEADER
+
                         pricingTableCardHeader:
                             "text-white! text-xl! font-bold!",
 
 
 
-                        // PRICE
                         pricingTableCardPrice:
                             "text-[#e94560]! text-4xl! font-extrabold!",
 
-                        // FEATURES
+
                         pricingTableCardFeatures:
                             "text-white!/70!",
 
@@ -58,15 +57,15 @@ const SubscriptionPage = () => {
                         pricingTableCardButton__hover:
                             "shadow-[0_0_20px_rgba(233,69,96,0.5)]! -translate-y-1!",
 
-                        // POPULAR PLAN (highlight center card)
+
                         pricingTableCard__active:
                             "border-[#e94560]! shadow-[0_0_30px_rgba(233,69,96,0.3)]!",
 
-                        // BADGE (Most Popular)
+
                         pricingTableCardBadge:
                             "bg-[#e94560]! text-white! text-xs! px-3! py-1! rounded-full!",
 
-                        // Toggle ring
+
                         switchIndicator:
                             "group ring-white! data-[checked=true]:bg-[#e94560]! bg-white! ",
 
@@ -77,28 +76,25 @@ const SubscriptionPage = () => {
                         drawerContent:
                             "  bg-[#0f3460]/95! backdrop-blur-xl! border! border-white/10",
 
-                        // Overlay background
 
 
                         drawerOverlay:
                             " inset-0! bg-black/70! backdrop-blur-sm!",
 
-                        // Buttons
+
                         buttonPrimary:
                             "bg-linear-to-r! from-[#e94560]! to-[#1a1a2e]! text-white!",
 
                         buttonPrimary__hover:
                             "shadow-[0_0_20px_rgba(233,69,96,0.5)]!",
 
-                        // Text
                         text:
                             "text-white!",
 
-                        // Inputs
                         formFieldInput:
                             "bg-white/5! border-white/10! text-white!",
 
-                        // Cards inside drawer
+
                         card:
                             "bg-white/5! border! border-white/10! backdrop-blur-md!",
 

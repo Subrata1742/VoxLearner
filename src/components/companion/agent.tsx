@@ -13,6 +13,7 @@ import Waves from '@/app/constrant/Wave.json'
 import { useRouter } from 'next/navigation';
 import { newSessionPermissions, updateConversations } from '@/lib/actions/companion.action';
 import { Mic, MicOff, Phone, PhoneOff, ArrowLeft, Activity, MessageSquareText, Bot } from 'lucide-react';
+import Loading from '@/app/loading';
 
 enum CallStatus {
     INACTIVE = "INACTIVE",
@@ -31,6 +32,7 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
     const [isMuted, setIsMuted] = useState(false);
     const [messages, setMessages] = useState<SavedMessage[]>([]);
     const [callPermission, setCallPermission] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const lottieRef = useRef<LottieRefCurrentProps>(null);
     const router = useRouter();
@@ -83,6 +85,8 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
         vapi.on('error', onError);
         vapi.on('speech-start', onSpeechStart);
         vapi.on('speech-end', onSpeechEnd);
+
+
         return () => {
             vapi.off('call-start', onCallStart);
             vapi.off('call-end', onCallEnd);
@@ -112,15 +116,22 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
         toast.success("Call started");
     }
     const endCall = () => {
+        setIsLoading(true);
         vapi.stop();
         setCallStatus(CallStatus.FINISHED);
         toast.success("Call ended");
         updateConversations(id, messages);
-        router.back();
+        setTimeout(() => {
+            setIsLoading(false);
+            router.back();
+        }, 500);
+
     }
 
 
-
+    if (isLoading) {
+        return <Loading />
+    }
 
     return (
         <div className="flex flex-col gap-3 w-full h-full max-w-6xl mx-auto ">
