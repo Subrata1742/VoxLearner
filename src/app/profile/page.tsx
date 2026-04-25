@@ -3,15 +3,18 @@ import { currentUser } from '@clerk/nextjs/server';
 
 import Link from 'next/link';
 import { Bot, Activity } from 'lucide-react';
-import { conversationCount, getAllCompanions } from '@/lib/actions/companion.action';
+import { conversationCount, getRescentSessions } from '@/lib/actions/companion.action';
 import CompanionCard from '@/components/homePage/companionCard';
+
 
 export default async function ProfilePage() {
     const user = await currentUser();
 
+
+
     if (!user) {
         return (
-            <div className="layout-container" style={{ justifyContent: 'center' }}>
+            <div className="h-screen flex items-center justify-center">
                 <div className="empty-state">
                     <h2 className="text-2xl text-white mb-2">Please sign in</h2>
                     <p>You need to be signed in to view your profile.</p>
@@ -20,20 +23,16 @@ export default async function ProfilePage() {
         );
     }
 
-    // Fetch companions for the user
-    const companions = await getAllCompanions();
 
-    // Fetch total conversations across all companions
+    const companions = await getRescentSessions();
     const totalConversations = await conversationCount();
 
     return (
-
         <div className="content-wrapper">
-
             {/* Header Profile Section */}
             <div className="header-section">
                 <div className="relative">
-                    {/* Using standard img to avoid next.config remote patterns edit */}
+
                     <img
                         src={user.imageUrl}
                         alt="Profile"
@@ -66,15 +65,15 @@ export default async function ProfilePage() {
             {/* Companions List Section */}
             <div className="companion-section">
                 <h2 className="section-title">
-                    <Bot size={28} color="#e94560" /> Your AI Companions
+                    <Bot size={28} color="#e94560" /> Your Recent Sessions
                 </h2>
 
                 {companions?.length === 0 ? (
                     <div className="empty-state">
-                        <h3 className="text-2xl text-white mb-2">No companions yet!</h3>
-                        <p>Create your first AI learning companion to start your journey.</p>
-                        <Link href="/companion/new" className="create-btn">
-                            Create Companion
+                        <h3 className="text-2xl text-white mb-2">No Sessions yet!</h3>
+                        <p>Join your first AI learning session to start your journey.</p>
+                        <Link href="/companion" className="create-btn">
+                            Start Learning
                         </Link>
                     </div>
                 ) : (

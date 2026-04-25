@@ -1,13 +1,13 @@
 "use client"
 import { vapi } from '@/lib/vapi.sdk';
 import { toast } from 'sonner';
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, use } from 'react'
 import { Button } from '../ui/button';
 import { configureAssistant } from '@/lib/utils';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
-import soundwaves from '@/app/constrant/sound waves.json'
+
 import Waves from '@/app/constrant/Wave.json'
 
 import { useRouter } from 'next/navigation';
@@ -21,12 +21,8 @@ enum CallStatus {
     ACTIVE = "ACTIVE",
     FINISHED = "FINISHED",
 }
-interface AgentProps {
-    id: string;
-    subject: string;
-    topic: string;
-}
-const Agent = ({ id, subject, topic }: AgentProps) => {
+
+const Agent = ({ id, subject, topic, voice, style, duration }: AgentProps) => {
     const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
@@ -38,9 +34,15 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
     const router = useRouter();
 
 
+    useEffect(() => {
+        if (callStatus == CallStatus.ACTIVE) {
+            setTimeout(() => {
+                endCall()
+            }, duration * 60 * 1000)
+        }
+    }, [callStatus])
 
     useEffect(() => {
-        // Call the permission function with the companion ID
         const canStartcall = async () => {
             const permission = await newSessionPermissions(id);
             if (!permission) {
@@ -112,7 +114,7 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
             serverMessages: [],
         }
         // @ts-expect-error
-        vapi.start(configureAssistant(), assistantOverrides);
+        vapi.start(configureAssistant(voice, style), assistantOverrides);
         toast.success("Call started");
     }
     const endCall = () => {
@@ -135,7 +137,7 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
 
     return (
         <div className="flex flex-col gap-3 w-full h-full max-w-6xl mx-auto ">
-            {/* Header - Fixed Height */}
+            {/* Header  */}
             <div className='agent-header-card py-2 '>
                 <Button variant="ghost" size="icon" onClick={() => router.back()} className="text-white hover:bg-white/10 rounded-full transition-colors">
                     <ArrowLeft size={24} />
@@ -163,11 +165,11 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
 
 
             <div className='flex flex-col gap-1 flex-1 w-full justify-center z-10'>
-                {/* Main Center Area: Visuals & Overlay (Flex Grow) */}
+                {/* Main Center Area */}
                 <div className='agent-center-container'>
                     <div className="agent-glow-bg"></div>
 
-                    {/* Status Indicator Top */}
+
                     <div className="agent-status-badge">
                         <div className={cn("w-2.5 h-2.5 rounded-full",
                             callStatus === CallStatus.ACTIVE ? "bg-green-500 animate-pulse shadow-[0_0_12px_rgba(34,197,94,0.9)]" :
@@ -176,9 +178,9 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
                         <span className="text-xs text-white/90 font-bold tracking-[0.15em] uppercase">{callStatus}</span>
                     </div>
 
-                    {/* Central Visuals */}
+
                     <div className="relative w-full flex-1 flex items-center justify-center min-h-[250px] md:min-h-[300px]">
-                        {/* Avatar Core */}
+
                         <div className={cn('agent-avatar-ring',
                             callStatus === CallStatus.ACTIVE ? ' scale-110 shadow-[0_0_120px_rgba(233,69,96,0.6)] border-[#e94560]/80' : 'scale-100 border-white/10 bg-[#e94560]/20',
                             callStatus === CallStatus.CONNECTING && 'animate-pulse border-yellow-500/50 shadow-[0_0_60px_rgba(234,179,8,0.3)]'
@@ -186,7 +188,7 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
                             <Bot size={180} className={cn("text-[#e94560] mb-3 transition-opacity duration-1000", callStatus === CallStatus.ACTIVE ? 'opacity-0' : '')} />
                         </div>
 
-                        {/* Soundwaves Animation */}
+                        {/* waves Animation */}
                         <div className={cn('absolute z-50 transition-opacity duration-1000 w-[250px] h-[250px] md:w-[400px] md:h-[400px] pointer-events-none', callStatus === CallStatus.ACTIVE ? 'opacity-100 ' : 'opacity-0 ')}>
                             <Lottie
                                 lottieRef={lottieRef}
@@ -201,7 +203,7 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
 
 
 
-                {/* Live Transcript Subtitle Overlay */}
+                {/* Live Transcript  */}
                 <div className="w-full flex justify-center z-30 h-[100px] md:h-[130px] mt-1">
                     <div className="agent-transcript-box">
                         {messages.length > 0 ? (
@@ -234,7 +236,7 @@ const Agent = ({ id, subject, topic }: AgentProps) => {
 
 
 
-            {/* Call Controls Box - Docked at bottom */}
+            {/* Call Controls Box */}
             <div className='flex justify-center items-center gap-5 md:gap-8 z-40 w-full px-4'>
                 {callStatus === CallStatus.ACTIVE && (
                     <Button

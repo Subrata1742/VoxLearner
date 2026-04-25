@@ -23,6 +23,7 @@ import Link from 'next/link'
 import { createCompanion } from '@/lib/actions/companion.action'
 import { redirect } from 'next/navigation';
 import { Bot, Sparkles, Mic, Clock, Type, X } from 'lucide-react';
+import { subject } from '@/app/constrant';
 
 const CompanionForm = () => {
 
@@ -90,18 +91,9 @@ const CompanionForm = () => {
                                 </SelectTrigger>
                                 <SelectContent className="bg-[#1a1a2e] border-white/10 text-white rounded-xl">
                                     <SelectGroup>
-                                        <SelectItem value="science">Science</SelectItem>
-                                        <SelectItem value="maths">Maths</SelectItem>
-                                        <SelectItem value="language">Language</SelectItem>
-                                        <SelectItem value="coding">Coding</SelectItem>
-                                        <SelectItem value="history">History</SelectItem>
-                                        <SelectItem value="economics">Economics</SelectItem>
-                                        <SelectItem value="chemistry">Chemistry</SelectItem>
-                                        <SelectItem value="physics">Physics</SelectItem>
-                                        <SelectItem value="biology">Biology</SelectItem>
-                                        <SelectItem value="geography">Geography</SelectItem>
-                                        <SelectItem value="computer">Computer</SelectItem>
-                                        <SelectItem value="other">Other</SelectItem>
+                                        {subject.map((subject) => (
+                                            <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+                                        ))}
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>
@@ -180,6 +172,8 @@ const CompanionForm = () => {
                                     placeholder="45"
                                     required
                                     type='number'
+                                    min={1}
+                                    max={60}
                                     className="form-input-field mt-1"
                                 />
                                 <p className="text-white/40 text-xs mt-3 ml-1 leading-relaxed">

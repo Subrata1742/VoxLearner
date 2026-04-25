@@ -25,7 +25,7 @@ const Companionlist = async ({ searchParams }: SearchParams) => {
     }
 
     const companionList = await getAllCompanions({ subject, topic });
-    console.log(companionList);
+
     return (
         <main className='content-wrapper'>
 

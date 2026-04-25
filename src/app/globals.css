@@ -215,7 +215,7 @@
 
   .companion-card {
     @apply bg-[#0f3460]/40 backdrop-blur-[10px] border border-white/5 rounded-2xl p-6 transition-all duration-300 flex flex-col gap-4 cursor-pointer relative overflow-hidden;
-    /* MOVED EASE TO STANDARD CSS */
+
     transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 
@@ -263,8 +263,7 @@
 
   }
 
-  /* Add these to your existing @layer components */
-
+  /* home sectiom  */
   .hero-title {
     @apply text-[2.5rem] md:text-[3.5rem] lg:text-[4rem] font-extrabold leading-[1.1] mb-2 text-center md:text-left;
   }
@@ -388,7 +387,7 @@
   }
 
   .navbar-brand-text {
-    @apply font-extrabold text-transparent bg-clip-text bg-linear-to-r from-white to-[#e94560] text-xl hidden sm:inline-block tracking-wide;
+    @apply font-extrabold text-transparent bg-clip-text bg-linear-to-r from-white to-[#e94560] text-xl sm:inline-block tracking-wide;
   }
 
   .navbar-signin-btn {
@@ -415,9 +414,15 @@
   .nav-item-inactive {
     @apply text-white/60 hover:text-white hover:bg-white/5;
   }
+
+
+  /* Dashboard styling */
+  .dashboard-card {
+    @apply !bg-white/5 !backdrop-blur-md !border-white/10 !text-white hover:border-[#e94560]/30 !transition-all !shadow-lg;
+  }
 }
 
-/* Custom Keyframes kept outside of @apply for better browser support */
+
 @keyframes rotate-bg {
   from {
     transform: rotate(0deg);

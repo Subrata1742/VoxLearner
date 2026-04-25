@@ -13,6 +13,7 @@ const Navitem = ({ isMobile }: NavItemProps) => {
         { name: "Companions", href: "/companion" },
         { name: "Pricing", href: "/subscription" },
         { name: "Profile", href: "/profile" },
+        { name: "DashBoard", href: "/dashboard" },
     ]
     const params = usePathname()
 

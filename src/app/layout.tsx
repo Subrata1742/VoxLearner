@@ -35,7 +35,7 @@ export default function RootLayout({
           appearance={{
             variables: {
               colorPrimary: "#e94560",
-              colorBackground: "#0f3460",
+              colorBackground: " #1a1a2e",
               colorForeground: "#ffffff",
               colorMutedForeground: "rgba(255,255,255,0.6)",
               colorBorder: "rgba(255,255,255,1)",
@@ -46,12 +46,9 @@ export default function RootLayout({
             elements: {
               userButtonPopoverActionButton: "text-white! ",
               tabButton: " text-gray-200! focus:text-[#e94560]! hover:text-white!",
-
               socialButtonsBlockButtonText: "text-white!",
-
-
-
-
+              avatarImageActionsUpload: "text-white!",
+              drawerRoot: "z-999! "
             }
           }}
 

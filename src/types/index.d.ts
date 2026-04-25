@@ -15,6 +15,7 @@ interface GetAllCompanions {
     page?: number;
     subject?: string | string[];
     topic?: string | string[];
+
 }
 interface SearchParams {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

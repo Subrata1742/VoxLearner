@@ -1,3 +1,24 @@
+export const voices = {
+    male: { casual: "2BJW5coyhAzSr8STdHbE", formal: "c6SfcYrb2t09NHXiT80T" },
+    female: { casual: "ZIlrSGI4jZqobxRKprJz", formal: "sarah" },
+};
+
+
+export const subject = [
+    "science",
+    "maths",
+    "language",
+    "coding",
+    "history",
+    "economics",
+    "chemistry",
+    "physics",
+    "biology",
+    "geography",
+    "computer",
+    "other"
+];
+
 export const companionList = [
     {
         id: "1",

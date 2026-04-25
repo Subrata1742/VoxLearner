@@ -14,13 +14,11 @@ export const SearchInput = () => {
     const subject = searchParams.get("subject");
 
     const [value, setValue] = useState(topic || "");
-
-    // The library returns [debouncedValue]
     const [debouncedValue] = useDebounce(value, 500);
 
     useEffect(() => {
         const url = qs.stringifyUrl({
-            url: window.location.href, // Or use specific path like '/companion'
+            url: window.location.href,
             query: {
                 subject: subject,
                 topic: debouncedValue,

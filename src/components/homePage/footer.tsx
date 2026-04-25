@@ -10,7 +10,7 @@ const Footer = () => {
 
     return (
         <footer className="w-screen mt-24 border-t border-white/10 bg-black/20 backdrop-blur-xl relative overflow-hidden">
-            {/* Decorative background glow */}
+
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#e94560]/10 blur-[120px] rounded-full -z-10"></div>
 
             <div className="max-w-7xl mx-auto px-8 py-16">

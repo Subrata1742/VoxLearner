@@ -22,16 +22,16 @@ const Navbar = () => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
 
-            // Show at the very top (within 20px)
+
             if (currentScrollY < 20) {
                 setIsVisible(true);
             }
-            // Hide when scrolling down past the top
+
             else if (currentScrollY > lastScrollY) {
                 setIsVisible(false);
                 setIsMobileMenuOpen(false);
             }
-            // Show when scrolling up
+
             else {
                 setIsVisible(true);
             }
@@ -43,7 +43,8 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [lastScrollY]);
 
-    // Hide navbar inside active companion calls
+
+
     if (pathname.startsWith('/companion/') && pathname !== '/companion/new') return null;
     if (pathname === '/sign-in') return null;
 
@@ -62,13 +63,14 @@ const Navbar = () => {
                         </Link>
                     </div>
 
-                    {/* Nav Items centered on desktop */}
+
                     <div className="hidden md:flex items-center absolute left-1/2 -translate-x-1/2">
                         <Navitem />
                     </div>
 
+                    {/* Nav Items on mobile */}
                     <div className="flex items-center gap-2 md:gap-4">
-                        {/* Nav Items on mobile */}
+
 
                         <header>
                             <Show when="signed-out">

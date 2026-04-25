@@ -12,7 +12,7 @@ export default async function Home() {
   return (
     <main className="content-wrapper flex flex-col gap-24">
 
-      {/* 1. Hero Section */}
+      {/* Hero Section */}
       <section className="header-section ">
         <div className="flex flex-col gap-4 items-center md:items-start md:w-3/5">
           <div className="pro-badge flex items-center max-md:py-2 gap-2 md:gap-2 max-md:text-xs capitalize">
@@ -38,10 +38,10 @@ export default async function Home() {
         </div>
 
         <div className="max-md:hidden flex items-center justify-center relative md:w-2/5 group">
-          {/* Your existing glowing background effect */}
+
           <div className="absolute inset-0 bg-[#e94560]/20 blur-[100px] rounded-full scale-125 -z-10 transition-all duration-700 group-hover:bg-[#e94560]/30"></div>
 
-          {/* The newly transparent image */}
+
           <div className="relative w-[400px] h-[400px]">
             <Image
               src="/robot-removebg-preview.png"
@@ -55,7 +55,8 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 2. Features Section */}
+
+      {/*  Features Section */}
       <section className="flex flex-col gap-10">
         <div className="text-center">
           <h2 className="user-name max-md:text-[1.5rem]!">Why Choose Vox Learner?</h2>
@@ -89,7 +90,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 3. How It Works Section */}
+      {/* How It Works Section */}
       <section className="stat-card text-left! p-10! md:p-16!">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#e94560]/10 blur-[100px] rounded-full pointer-events-none"></div>
         <div className="text-center mb-16 relative z-10">
@@ -121,7 +122,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 4. Companion List Section */}
+      {/* Companion List Section */}
       <section className="companions-section">
         <h2 className="section-title">
           <Bot size={28} className="text-[#e94560]" /> Your AI Companions
@@ -156,7 +157,7 @@ export default async function Home() {
         )}
       </section>
 
-      {/* 5. CTA Section */}
+      {/* CTA Section */}
       <section className="stat-card p-12! md:p-20! bg-linear-to-br! from-[#0f3460]! to-[#1a1a2e]! mb-10">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(233,69,96,0.3)_0%,transparent_50%)]"></div>
         <div className="relative z-10 flex flex-col items-center">

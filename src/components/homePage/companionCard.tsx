@@ -1,5 +1,5 @@
 
-import { Clock, Activity } from 'lucide-react';
+import { Clock, Mars, Venus } from 'lucide-react';
 
 const CompanionCard = ({ companion }: { companion: any }) => {
     return (
@@ -14,7 +14,7 @@ const CompanionCard = ({ companion }: { companion: any }) => {
 
             <div className="companion-details">
                 <div className="flex items-center gap-2 text-sm text-[#ffffffb3]">
-                    <Activity className="text-[#e94560]" size={16} />
+                    {companion.voice === "female" ? <Venus className="text-[#e94560]" size={16} /> : <Mars className="text-[#e94560]" size={16} />}
                     <span>{companion.style}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-[#ffffffb3]">

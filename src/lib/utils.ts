@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
+import { voices } from "@/app/constrant";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -8,10 +9,12 @@ export function cn(...inputs: ClassValue[]) {
 
 //vapi sdk
 
-export const configureAssistant = () => {
+export const configureAssistant = (voice: string, style: string) => {
 
 
-  const voiceId = "sarah";
+  const voiceId = voices[voice as keyof typeof voices][
+    style as keyof (typeof voices)[keyof typeof voices]
+  ] || "sarah";
 
   const vapiAssistant: CreateAssistantDTO = {
     name: "Companion",
