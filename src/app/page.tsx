@@ -140,7 +140,7 @@ export default async function Home() {
         ) : (
           <>
             <div className="companions-grid">
-              {companionsList.slice(0, 3).map((companion) => (
+              {companionsList.slice(0, 3).map((companion: any) => (
                 <Link href={`/companion/${companion.id}`} key={companion.id} className="no-underline">
                   <CompanionCard companion={companion} />
                 </Link>

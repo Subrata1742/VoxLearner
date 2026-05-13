@@ -1,4 +1,4 @@
-import { PrismaClient } from "../../src/app/generated/prisma/client"; // ✅ CRITICAL: Include /client
+import { PrismaClient } from "@prisma/client"// ✅ CRITICAL: Include /client
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
 

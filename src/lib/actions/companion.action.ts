@@ -236,7 +236,7 @@ export const getRescentSessions = async (limit = 9) => {
             }
         });
 
-        return recentConversations.map(conv => conv.companion);
+        return recentConversations.map((conv: any) => conv.companion);
     } catch (error: any) {
         console.error("Error fetching recent companions:", error);
         return;
