@@ -27,17 +27,20 @@ export const createCompanion = async (formData: CreateCompanion) => {
 
 
 export const getAllCompanions = async ({ limit = 10, page = 1, subject, topic }: GetAllCompanions = {}) => {
+
+    const { userId: author } = await auth();
+
+    if (!author) {
+        return;
+    }
+
+
     try {
-        const { userId: author } = await auth();
-        if (!author) {
-            return;
-        }
         const skip = (page - 1) * limit;
 
         const where: any = { userId: author };
 
         if (subject && topic) {
-
             where.AND = [
                 { subject: { contains: subject, mode: 'insensitive' } },
                 {
@@ -50,9 +53,7 @@ export const getAllCompanions = async ({ limit = 10, page = 1, subject, topic }:
         } else if (subject) {
             where.subject = { contains: subject, mode: 'insensitive' };
         } else if (topic) {
-
             where.OR = [
-
                 { topic: { contains: topic, mode: 'insensitive' } },
                 { name: { contains: topic, mode: 'insensitive' } }
             ];
@@ -73,7 +74,6 @@ export const getAllCompanions = async ({ limit = 10, page = 1, subject, topic }:
         throw new Error(error.message || "Failed to fetch companions");
     }
 };
-
 
 
 export const getCompanionById = async (id: string) => {
