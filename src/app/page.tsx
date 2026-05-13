@@ -1,10 +1,11 @@
-import { Button } from "@/components/ui/button";
+export const dynamic = "force-dynamic"; // for deploymemnt
+
 import Link from "next/link";
 import Image from "next/image";
 import CompanionCard from "@/components/homePage/companionCard";
 import { getAllCompanions } from "@/lib/actions/companion.action";
 import { Bot, Sparkles, Mic, Brain, Zap, ArrowRight, UserPlus, PlayCircle } from "lucide-react";
-import Footer from "@/components/homePage/footer";
+
 
 export default async function Home() {
   const companionsList = await getAllCompanions();
