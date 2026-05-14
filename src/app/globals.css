@@ -132,7 +132,7 @@
 @layer components {
 
   .layout-container {
-    @apply min-h-screen px-8 text-white font-sans flex flex-col items-center relative overflow-clip;
+    @apply min-h-screen px-5 text-white font-sans flex flex-col items-center relative overflow-clip;
     background: radial-gradient(circle at top left, #1a1a2e, #16213e, #0f3460);
   }
 
